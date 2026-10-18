@@ -6,5 +6,5 @@
 window.HIMARTHA_CONFIG = {
   SUPABASE_URL: "https://asmbyfaurvyntpmsayio.supabase.co",
   SUPABASE_PUBLISHABLE_KEY: "sb_publishable_KcaseRgm-MLIrHyg5TjBlw_CuqXBjxq",
-  WHATSAPP_NUMBER: "91XXXXXXXXXX"
+  WHATSAPP_NUMBER: "919520951715"
 };
