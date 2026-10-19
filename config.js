@@ -8,7 +8,7 @@ window.STORE_CONFIG = {
   TAGLINE: "Aipan Art Clocks · Heritage, Handcrafted",
   PICKUP_PINCODE: "263641", // Garur, Bageshwar, Uttarakhand
   DEFAULT_PARCEL_WEIGHT_GRAMS: 1000, // 1 kg packed-parcel planning default
-  SUPABASE_URL: "https:asmbyfaurvyntpmsayio.supabase.co",
+  SUPABASE_URL: "https://asmbyfaurvyntpmsayio.supabase.co",
   SUPABASE_PUBLISHABLE_KEY: "sb_publishable_KcaseRgm-MLIrHyg5TjBlw_CuqXBjxq",
   // This number is only for product questions/custom enquiries, not order checkout.
   WHATSAPP_NUMBER: "91XXXXXXXXXX"
