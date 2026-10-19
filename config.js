@@ -9,7 +9,7 @@ window.STORE_CONFIG = {
   PICKUP_PINCODE: "263641", // Garur, Bageshwar, Uttarakhand
   DEFAULT_PARCEL_WEIGHT_GRAMS: 1000, // 1 kg packed-parcel planning default
   SUPABASE_URL: "https://YOUR_PROJECT_ID.supabase.co",
-  SUPABASE_PUBLISHABLE_KEY: "REPLACE_WITH_SUPABASE_PUBLISHABLE_OR_ANON_KEY",
+  SUPABASE_PUBLISHABLE_KEY: "sb_publishable_KcaseRgm-MLIrHyg5TjBlw_CuqXBjxq",
   // This number is only for product questions/custom enquiries, not order checkout.
   WHATSAPP_NUMBER: "91XXXXXXXXXX"
 };
