@@ -11,5 +11,5 @@ window.STORE_CONFIG = {
   SUPABASE_URL: "https://asmbyfaurvyntpmsayio.supabase.co",
   SUPABASE_PUBLISHABLE_KEY: "sb_publishable_KcaseRgm-MLIrHyg5TjBlw_CuqXBjxq",
   // This number is only for product questions/custom enquiries, not order checkout.
-  WHATSAPP_NUMBER: "91XXXXXXXXXX"
+  WHATSAPP_NUMBER: "919520951715"
 };
