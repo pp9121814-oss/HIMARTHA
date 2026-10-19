@@ -1,0 +1,111 @@
+SHAILYA — BEGINNER SETUP GUIDE
+==============================
+Follow these steps in order. Do not skip the Supabase setup if you want orders to appear
+inside the Owner Admin page.
+
+PART 1 — CREATE THE NEW GITHUB WEBSITE
+--------------------------------------
+1. Open https://github.com/new and create a repository named SHAILYA (or any name you like).
+2. Public repository is the easiest way to use GitHub Pages. Create it without a README if
+   you want the simplest first upload (a README is okay too).
+3. Download/extract this ZIP on your computer. Open the extracted SHAILYA_Full_Store folder.
+4. Upload the CONTENTS of that folder into the repository root. The root should directly
+   contain index.html, admin.html, order.html, config.js, store.js, admin.js, order.js,
+   supabase-schema.sql, assets/ and .nojekyll. Do not upload one extra nested folder.
+5. Commit the files to the main branch.
+6. Open repository Settings > Pages. Choose Deploy from a branch, select branch main and
+   folder /(root), then Save. Wait until GitHub shows the published site URL.
+7. Open the public URL and check that the premium storefront loads. Real orders are not
+   enabled until Part 2 is complete.
+
+PART 2 — CONNECT SUPABASE (DATABASE + PRIVATE ADMIN)
+---------------------------------------------------
+A. Make a Supabase project
+1. Open https://supabase.com and create a project.
+2. In Project Settings > API / Connect, copy the Project URL and the PUBLIC publishable key
+   (or legacy anon key). These values are intended for frontend use.
+3. Open config.js in GitHub, click Edit, and replace only these two placeholders:
+      SUPABASE_URL: "https://YOUR_PROJECT_ID.supabase.co"
+      SUPABASE_PUBLISHABLE_KEY: "REPLACE_WITH_SUPABASE_PUBLISHABLE_OR_ANON_KEY"
+   Paste your own URL and public key, keep the quotation marks and commas, then commit.
+   NEVER paste a secret key or service_role key into config.js or any website file.
+
+B. Create the database tables
+1. In Supabase, open SQL Editor > New query.
+2. Open the local supabase-schema.sql file from the extracted ZIP and copy its entire contents.
+3. Paste the SQL in Supabase SQL Editor and click Run. It creates products, orders, private
+   order permissions, product-image storage and the order-submission function. The sample
+   products are inserted automatically if their names are not already present.
+
+C. Make your owner login
+1. In Supabase open Authentication > Users > Add user (manual user creation).
+2. Create the owner's email and password. Keep them private. Do not add a signup form to
+   the public website.
+3. Copy that user's UUID from the Users page.
+4. Go to SQL Editor and run this query, replacing the placeholder with the UUID:
+      insert into public.admin_users (user_id)
+      values ('PASTE-OWNER-AUTH-UUID-HERE')
+      on conflict (user_id) do nothing;
+5. Open your website URL and tap Owner Login in the footer (or open /admin.html).
+6. Sign in with that email/password. Only the UUID added to admin_users is authorized.
+
+PART 3 — FIRST PRODUCTS AND CUSTOMER ORDER TEST
+-----------------------------------------------
+1. In Owner Login > Product Studio, edit the five example products, price, stock and photos.
+2. Add a new product through the form. JPG / PNG / WebP photos up to 5 MB are supported.
+3. Open the storefront in a separate browser tab. Add a product to cart and tap Proceed to
+   checkout.
+4. Fill customer name, 10-digit mobile, full street/village, locality, city, district, state
+   and 6-digit PIN. Use GPS only if the customer chooses to share it and grants permission.
+5. Tick the consent checkbox, then Place order securely. Available stock is reserved; cancelling an unshipped order restores stock. A confirmation window displays the
+   generated SH-YYYYMMDD-XXXXXX order number. The saved order is not sent to WhatsApp.
+6. Open Owner Login > View customer orders. The new order should appear with its first
+   product photo, item count, customer, city/state and PIN. Open the full order page.
+7. Check every product image, quantity, address, map link (only if shared), and order number.
+   You can print / save the page as PDF and copy the delivery address.
+8. On the full order page, set shipping charge, courier/company, AWB/tracking number and
+   tracking URL after arranging shipment. Save the status / payment status / notes.
+9. Remove or mark your test order if needed before accepting real customers.
+
+PART 4 — BRAND AND DELIVERY SETTINGS
+-----------------------------------
+- Brand: SHAILYA. Website footer credits WEBLYFT.
+- Source pickup PIN default: 263641 (Garur, Bageshwar, Uttarakhand).
+- Planning parcel weight default: 1,000 g (1 kg).
+- To enable enquiry buttons only, update WHATSAPP_NUMBER in config.js with digits including
+  country code, e.g. 91 + 10-digit mobile number. No + symbol or spaces.
+- Orders can be submitted with an Indian six-digit PIN. Check courier serviceability and
+  rates manually for the customer PIN before confirming delivery.
+- The admin order page lets you record the final shipping amount and courier tracking info.
+  It does not itself book a courier pickup, create labels, calculate live rates or send a
+  parcel. For that you need to sign up with Shiprocket / Delhivery One / India Post and
+  either book shipments manually or later integrate their APIs.
+- The checkout does not collect money. Configure a payment gateway separately if you want
+  prepaid online payment. Payment status can be updated manually in admin.
+
+TROUBLESHOOTING
+---------------
+- Store shows preview products and checkout says orders are not connected: check the two
+  values in config.js, verify SQL ran without error, then reload after the GitHub deploy.
+- Owner login disabled: config.js still has placeholders or Supabase JS/network failed.
+- Login works but owner is not authorized: check that the currently logged-in Auth UUID is
+  present in public.admin_users.
+- No orders panel data: ensure the order SQL was run, owner is authorized, and the user made
+  a test submission after the backend became active.
+- Product photos do not show: make sure you uploaded the assets/ folder; products added from
+  admin use Supabase Storage public URLs automatically.
+- GPS button does not work: GitHub Pages must load over HTTPS and the browser must grant
+  location permission. The written address and PIN remain required either way.
+- Never share the owner password. Never publish a Supabase secret/service_role key.
+
+CLEAN TEST BEFORE LAUNCH
+------------------------
+[ ] Supabase URL + publishable key added
+[ ] SQL ran successfully
+[ ] Owner Auth user created + UUID inserted into admin_users
+[ ] Prices, stock, product names/photos reviewed
+[ ] Test order submitted and appears in owner dashboard
+[ ] Full order page shows product photos, full address, PIN and optional GPS
+[ ] Shipping fee + carrier/AWB can be saved
+[ ] WhatsApp enquiry number set only if wanted
+[ ] Live page tested on both desktop and phone

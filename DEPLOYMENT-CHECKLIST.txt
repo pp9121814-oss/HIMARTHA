@@ -1,0 +1,17 @@
+SHAILYA PRE-LAUNCH CHECKLIST
+============================
+[ ] GitHub Pages root contains index.html, admin.html, order.html and config.js.
+[ ] The assets/ folder was committed with all six included photos.
+[ ] config.js uses the new Supabase project's URL and public publishable/anon key.
+[ ] The SQL schema ran successfully in that same Supabase project.
+[ ] The owner Auth UUID is present in public.admin_users.
+[ ] All demo product prices and stock amounts are correct.
+[ ] Test order has the expected SH- order number.
+[ ] Owner can view the complete order page and photos.
+[ ] Customer PIN and written address are correct; GPS link appears only with permission.
+[ ] Owner can set shipping fee, carrier, AWB, tracking URL and status.
+[ ] Courier coverage and pricing were checked for the destination PIN.
+[ ] Payment method/amount are clearly agreed with the customer before processing.
+
+Notes: the included source does not automatically book courier pickups, calculate live
+rates or charge payments. Those require separate provider accounts / API integration.
